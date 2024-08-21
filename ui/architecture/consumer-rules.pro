@@ -1,0 +1,5 @@
+-dontwarn io.lemon.android.core.ui.architecture.BaseEffect
+-dontwarn io.lemon.android.core.ui.architecture.BaseEvent
+-dontwarn io.lemon.android.core.ui.architecture.BaseState
+-dontwarn io.lemon.android.core.ui.architecture.BaseError
+-dontwarn io.lemon.android.core.ui.architecture.BaseViewModel
