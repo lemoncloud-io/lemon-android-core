@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.lemon.android.application)
-    alias(libs.plugins.lemon.android.application.compose)
+    alias(libs.plugins.lemon.android.library)
+    alias(libs.plugins.lemon.android.library.compose)
     alias(libs.plugins.lemon.android.feature)
     alias(libs.plugins.lemon.android.compose.ext)
     alias(libs.plugins.lemon.android.datastore)
@@ -10,11 +10,6 @@ plugins {
     alias(libs.plugins.lemon.android.kotlin)
 }
 
-
-android{
-    namespace = "io.lemon.android"
+android {
+    namespace = "io.lemon.android.core"
 }
-dependencies {
-    implementation(project(":core"))
-}
-

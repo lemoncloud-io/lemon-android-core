@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":core")
