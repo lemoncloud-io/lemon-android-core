@@ -21,5 +21,5 @@ dependencyResolutionManagement {
     }
 }
 
-include(":app")
-include(":core")
+include(":sample")
+include(":ui:architecture")

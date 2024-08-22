@@ -17,7 +17,7 @@ internal object Config {
         ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHH")).toInt()
 
     // You must change app package path and it.
-    const val APPLICATION_ID = "io.lemon.android.nfc"
+    const val APPLICATION_ID = "io.lemon.android.core"
 
     val JAVA_VERSION = JavaVersion.VERSION_17
     val JVM_TARGET = JvmTarget.JVM_17
@@ -47,20 +47,20 @@ internal object Config {
                 ))
             ),
             FlavorType(
-                name = "qa",
-                suffix = ".qa",
+                name = "staging",
+                suffix = ".staging",
                 resourceValue = listOf(ResourceType(
                     type = ResourceType.Type.StringType,
                     name = "app_label",
-                    value = "lemon.qa"
+                    value = "lemon.staging"
                 ))
             ),
             FlavorType(
-                name = "pro",
+                name = "live",
                 resourceValue = listOf(ResourceType(
                     type = ResourceType.Type.StringType,
                     name = "app_label",
-                    value = "lemon"
+                    value = "lemon.live"
                 ))
             )
         )
