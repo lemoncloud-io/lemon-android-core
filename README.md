@@ -5,10 +5,10 @@
 
 ## Module
 
-| module                           | description               |
-|----------------------------------|---------------------------|
-| ui-architecture                  | mvi 기반 architecture 인터페이스 |
-| android-component(Not implement) | android component 관련 유틸리티 |
+| module                                      | description               |
+|---------------------------------------------|---------------------------|
+| lemon-core-ui:architecture                  | mvi 기반 architecture 인터페이스 |
+| lemon-core-android:component(Not implement) | android component 관련 유틸리티 |
 
 
 ### UI-Architecture

@@ -12,9 +12,9 @@ plugins {
 
 
 android{
-    namespace = "io.lemon.android"
+    namespace = "io.lemon.android.core"
 }
 dependencies {
-    implementation(project(":ui:architecture"))
+    implementation(project(":lemon-core-ui:architecture"))
 }
 
