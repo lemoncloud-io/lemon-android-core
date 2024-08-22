@@ -10,11 +10,9 @@ plugins {
     alias(libs.plugins.lemon.android.kotlin)
 }
 
-
-android{
-    namespace = "io.lemon.android"
+android {
+    namespace = "io.lemon.android.core"
 }
 dependencies {
-    implementation(project(":ui:architecture"))
+    implementation(project(":lemon-core-ui:architecture"))
 }
-

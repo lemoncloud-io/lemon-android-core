@@ -1,0 +1,20 @@
+root = true
+
+[*]
+# 인코딩 방식
+charset = utf-8
+# 줄바꿈 타입
+end_of_line = lf
+# 들여쓰기 타입
+indent_style = space
+# true 경우, 문자 앞의 공백을 제거
+trim_trailing_whitespace = true
+# ture 경우, 파일을 저장할 때 새 줄로 끝남
+insert_final_newline = true
+# 최대 길이
+max_line_length = 120
+# indent_size
+indent_size = 4
+
+[*.{kt,kts}]
+disabled_rules = import-ordering,comment-spacing

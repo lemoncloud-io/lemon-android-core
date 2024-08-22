@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 }
 
 include(":sample")
-include(":ui:architecture")
+include(":lemon-core-ui:architecture")
