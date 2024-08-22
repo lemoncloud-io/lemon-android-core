@@ -2,6 +2,8 @@
 
 안드로이드에서 공통적으로 사용될 모듈 저장소
 
+##### 초기화
+- 최초로 프로젝트를 다운받은 후 `./init_lint_settings.sh` 를 실행해주세요. commit changes 에 대한 lint를 자동적으로 수행합니다.
 
 ## Module
 

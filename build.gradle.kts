@@ -22,6 +22,7 @@ allprojects {
     ktlint {
         reporters {
             reporter(ReporterType.JSON)
+            reporter(ReporterType.CHECKSTYLE)
         }
     }
     tasks.withType<GenerateReportsTask> {
