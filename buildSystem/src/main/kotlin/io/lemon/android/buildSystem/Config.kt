@@ -40,28 +40,13 @@ internal object Config {
             FlavorType(
                 name = "dev",
                 suffix = ".dev",
-                resourceValue = listOf(ResourceType(
-                    type = ResourceType.Type.StringType,
-                    name = "app_label",
-                    value = "lemon.dev"
-                ))
             ),
             FlavorType(
                 name = "staging",
                 suffix = ".staging",
-                resourceValue = listOf(ResourceType(
-                    type = ResourceType.Type.StringType,
-                    name = "app_label",
-                    value = "lemon.staging"
-                ))
             ),
             FlavorType(
                 name = "live",
-                resourceValue = listOf(ResourceType(
-                    type = ResourceType.Type.StringType,
-                    name = "app_label",
-                    value = "lemon.live"
-                ))
             )
         )
     }

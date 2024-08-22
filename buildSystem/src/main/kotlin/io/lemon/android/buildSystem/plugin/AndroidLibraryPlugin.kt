@@ -6,7 +6,6 @@ import io.lemon.android.buildSystem.Config.BuildType.DEBUG
 import io.lemon.android.buildSystem.Config.BuildType.RELEASE
 import io.lemon.android.buildSystem.Config.COMPILE_SDK
 import io.lemon.android.buildSystem.Config.MIN_SDK
-import io.lemon.android.buildSystem.extensions.configureFlavor
 import io.lemon.android.buildSystem.extensions.extensionAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -34,7 +33,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
                     }
 
                     getByName(RELEASE) {
-                        isMinifyEnabled = true
+                        isMinifyEnabled = false
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
                             "proguard-rules.pro"
