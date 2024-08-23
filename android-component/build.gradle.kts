@@ -5,5 +5,6 @@ plugins {
 }
 
 android {
-    namespace = "io.lemon.android.core.ui.architecture"
+    namespace = "io.lemon.core.android.component"
+    group = "io.lemon.core"
 }

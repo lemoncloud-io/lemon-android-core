@@ -1,4 +1,4 @@
-package io.lemon.android.core.ui.architecture
+package io.lemon.core.ui.architecture
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -16,7 +16,7 @@ internal object Config {
         ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHH")).toInt()
 
     // You must change app package path and it.
-    const val APPLICATION_ID = "io.lemon.android.core"
+    const val APPLICATION_ID = "io.lemon.core"
 
     val JAVA_VERSION = JavaVersion.VERSION_17
     val JVM_TARGET = JvmTarget.JVM_17

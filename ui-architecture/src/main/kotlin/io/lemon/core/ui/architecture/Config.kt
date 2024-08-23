@@ -1,4 +1,4 @@
-package io.lemon.android.core.ui.architecture
+package io.lemon.core.ui.architecture
 
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel.Factory.RENDEZVOUS

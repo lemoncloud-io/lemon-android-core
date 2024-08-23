@@ -16,5 +16,5 @@ sample 프로젝트 참고
 
 ### Architecture
 
-![ui-architecture](./assets/ui-architecture.jpeg)
+![ui-architecture](assets/ui-architecture.jpeg)
 
