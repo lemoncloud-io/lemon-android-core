@@ -1,7 +1,6 @@
 package io.lemon.android.buildSystem.plugin
 
 import com.android.build.api.dsl.ApplicationExtension
-import io.lemon.android.buildSystem.Config
 import io.lemon.android.buildSystem.Config.COMPILE_SDK
 import io.lemon.android.buildSystem.Config.MIN_SDK
 import io.lemon.android.buildSystem.Config.TARGET_SDK

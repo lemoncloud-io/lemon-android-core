@@ -1,5 +1,5 @@
 pluginManagement {
-    includeBuild("buildSystem")
+    includeBuild("build-system")
 
     repositories {
         google {
@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 
 include(":sample")
 include(":lemon-core-ui:architecture")
+include(":lemon-core-android:component")
