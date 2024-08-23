@@ -12,6 +12,7 @@ class AndroidFeaturePlugin : Plugin<Project> {
                     add("implementation", versionCatalog.findLibrary("androidx-appcompat").get())
                     add("implementation", versionCatalog.findLibrary("androidx-core-ktx").get())
                     add("implementation", versionCatalog.findLibrary("androidx-core-splashscreen").get())
+                    add("implementation", versionCatalog.findLibrary("androidx-lifecycle-service").get())
                     add("implementation", versionCatalog.findLibrary("androidx-lifecycle-viewmodel-ktx").get())
                     add("implementation", versionCatalog.findLibrary("androidx-lifecycle-runtime-ktx").get())
                     add("implementation", versionCatalog.findLibrary("androidx-navigation-runtime-ktx").get())

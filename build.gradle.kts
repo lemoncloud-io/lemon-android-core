@@ -31,3 +31,14 @@ allprojects {
         )
     }
 }
+
+tasks.register<Copy>("assembleAAR") {
+    from(
+        project.provider {
+            subprojects.flatMap { subproject ->
+                subproject.layout.buildDirectory.dir("outputs/aar").get().asFile.listFiles()?.toList() ?: emptyList()
+            }
+        }
+    )
+    into(rootProject.layout.buildDirectory.dir("outputs/aar"))
+}

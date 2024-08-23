@@ -1,7 +1,6 @@
 package io.lemon.android.buildSystem
 
 import io.lemon.android.buildSystem.extensions.type.FlavorType
-import io.lemon.android.buildSystem.extensions.type.ResourceType
 import org.gradle.api.JavaVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.time.ZonedDateTime

@@ -11,6 +11,6 @@ dependencyResolutionManagement {
 }
 
 
-rootProject.name = "buildSystem"
+rootProject.name = "build-system"
 
 
