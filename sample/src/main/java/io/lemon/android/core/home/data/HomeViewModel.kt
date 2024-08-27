@@ -1,7 +1,7 @@
 package io.lemon.android.core.home.data
 
-import io.lemon.android.core.ui.architecture.Config
-import io.lemon.android.core.ui.architecture.BaseViewModel
+import io.lemon.core.ui.architecture.Config
+import io.lemon.core.ui.architecture.BaseViewModel
 
 class HomeViewModel : BaseViewModel<HomeState, HomeEvent, HomeEffect, HomeError>() {
 

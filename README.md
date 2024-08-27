@@ -8,8 +8,9 @@
 
 | module                       | description               |
 |------------------------------|---------------------------|
-| lemon-core-ui:architecture   | mvi 기반 architecture 인터페이스 |
-| lemon-core-android:component | android component 유틸리티    |
+| android-component            | android component 유틸리티    |
+| ui-architecture              | mvi 기반 architecture 인터페이스 |
+| util-compose (Not Implement) | compose 유틸리티              |
 
 ### UI-Architecture
 
