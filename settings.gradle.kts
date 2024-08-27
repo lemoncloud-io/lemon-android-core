@@ -22,5 +22,5 @@ dependencyResolutionManagement {
 }
 
 include(":sample")
-include(":lemon-core-ui:architecture")
-include(":lemon-core-android:component")
+include(":android-component")
+include(":ui-architecture")
