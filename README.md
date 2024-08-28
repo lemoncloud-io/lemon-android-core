@@ -6,11 +6,11 @@
 
 ## Module
 
-| module                       | description               |
-|------------------------------|---------------------------|
-| android-component            | android component 유틸리티    |
-| ui-architecture              | mvi 기반 architecture 인터페이스 |
-| util-compose (Not Implement) | compose 유틸리티              |
+| module            | description               |
+|-------------------|---------------------------|
+| android-component | android component 유틸리티    |
+| ui-architecture   | mvi 기반 architecture 인터페이스 |
+| util-compose      | compose 유틸리티              |
 
 ### UI-Architecture
 
@@ -20,6 +20,10 @@
 ### Android-Component
 
 안드로이드 컴포넌트 제어 라이브러리 안드로이드 컴포넌트 초기화, 설정 및 컴포넌트간의 통신과 같은 작업을 수행합니다.
+
+### Compose-Util
+
+안드로이드 `Compose` 에서 사용되는 유틸리티 집합 라이브러리
 
 ## 초기화
 
