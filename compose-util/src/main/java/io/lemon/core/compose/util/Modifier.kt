@@ -15,6 +15,40 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ */
+fun Modifier.throttleClickable(
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+    onClickLabel: String? = null,
+    role: Role? = null,
+    coroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
+    throttleTime: Long = 250L,
+) = composed {
+    val coroutineScope = rememberCoroutineScope { coroutineDispatcher }
+    var lastEmissionTime: Long by remember { mutableLongStateOf(0L) }
+
+    clickable(
+        onClick = {
+            val currentTime = System.currentTimeMillis()
+            if (currentTime - lastEmissionTime >= throttleTime) {
+                coroutineScope.launch {
+                    lastEmissionTime = currentTime
+                    onClick()
+                }
+            }
+            lastEmissionTime = currentTime
+        },
+        enabled = enabled,
+        onClickLabel = onClickLabel,
+        role = role,
+    )
+}
+
+/**
+ * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ */
 fun Modifier.throttleClickable(
     onClick: () -> Unit,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
@@ -47,6 +81,9 @@ fun Modifier.throttleClickable(
     )
 }
 
+/**
+ * Click interaction 중 발생하는 시각 이펙트를 제거하는 확장자
+ */
 fun Modifier.noRippleClickable(
     onClick: () -> Unit,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
