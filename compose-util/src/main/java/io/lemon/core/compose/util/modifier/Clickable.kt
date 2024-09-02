@@ -1,4 +1,4 @@
-package io.lemon.core.compose.util
+package io.lemon.core.compose.util.modifier
 
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.clickable
