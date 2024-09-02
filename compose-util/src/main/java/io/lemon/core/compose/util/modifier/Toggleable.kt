@@ -1,8 +1,8 @@
-package io.lemon.core.compose.util
+package io.lemon.core.compose.util.modifier
 
 import androidx.compose.foundation.Indication
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
@@ -16,12 +16,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * Toggle interaction 이 연속적으로 발생하는 것을 방지하는 확장자
  */
-fun Modifier.throttleClickable(
-    onClick: () -> Unit,
+fun Modifier.throttleToggleable(
+    value: Boolean,
+    onValueChange: (Boolean) -> Unit,
     enabled: Boolean = true,
-    onClickLabel: String? = null,
     role: Role? = null,
     coroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
     throttleTime: Long = 250L,
@@ -29,32 +29,32 @@ fun Modifier.throttleClickable(
     val coroutineScope = rememberCoroutineScope { coroutineDispatcher }
     var lastEmissionTime: Long by remember { mutableLongStateOf(0L) }
 
-    clickable(
-        onClick = {
+    toggleable(
+        value = value,
+        onValueChange = {
             val currentTime = System.currentTimeMillis()
             if (currentTime - lastEmissionTime >= throttleTime) {
                 coroutineScope.launch {
                     lastEmissionTime = currentTime
-                    onClick()
+                    onValueChange(it)
                 }
             }
             lastEmissionTime = currentTime
         },
         enabled = enabled,
-        onClickLabel = onClickLabel,
         role = role,
     )
 }
 
 /**
- * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * Toggle interaction 이 연속적으로 발생하는 것을 방지하는 확장자
  */
-fun Modifier.throttleClickable(
-    onClick: () -> Unit,
+fun Modifier.throttleToggleable(
+    value: Boolean,
+    onValueChange: (Boolean) -> Unit,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
     indication: Indication? = null,
     enabled: Boolean = true,
-    onClickLabel: String? = null,
     role: Role? = null,
     coroutineDispatcher: CoroutineDispatcher = Dispatchers.Main,
     throttleTime: Long = 250L,
@@ -62,13 +62,14 @@ fun Modifier.throttleClickable(
     val coroutineScope = rememberCoroutineScope { coroutineDispatcher }
     var lastEmissionTime: Long by remember { mutableLongStateOf(0L) }
 
-    noRippleClickable(
-        onClick = {
+    noRippleToggleable(
+        value = value,
+        onValueChange = {
             val currentTime = System.currentTimeMillis()
             if (currentTime - lastEmissionTime >= throttleTime) {
                 coroutineScope.launch {
                     lastEmissionTime = currentTime
-                    onClick()
+                    onValueChange(it)
                 }
             }
             lastEmissionTime = currentTime
@@ -76,28 +77,27 @@ fun Modifier.throttleClickable(
         interactionSource = remember { interactionSource },
         indication = indication,
         enabled = enabled,
-        onClickLabel = onClickLabel,
         role = role
     )
 }
 
 /**
- * Click interaction 중 발생하는 시각 이펙트를 제거하는 확장자
+ * Toggle interaction 중 발생하는 시각 이펙트를 제거하는 확장자
  */
-fun Modifier.noRippleClickable(
-    onClick: () -> Unit,
+fun Modifier.noRippleToggleable(
+    value: Boolean,
+    onValueChange: (Boolean) -> Unit,
     interactionSource: MutableInteractionSource = MutableInteractionSource(),
     indication: Indication? = null,
     enabled: Boolean = true,
-    onClickLabel: String? = null,
     role: Role? = null,
 ) = composed {
-    clickable(
+    toggleable(
+        value = value,
         interactionSource = remember { interactionSource },
         indication = indication,
         enabled = enabled,
-        onClickLabel = onClickLabel,
-        onClick = onClick,
+        onValueChange = onValueChange,
         role = role
     )
 }
