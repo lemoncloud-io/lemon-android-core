@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 import org.jlleitschuh.gradle.ktlint.tasks.GenerateReportsTask
 
@@ -13,6 +14,42 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.parcelize) apply false
     alias(libs.plugins.ktlint) apply true
+    alias(libs.plugins.vanniktech) apply true
+}
+
+subprojects {
+    apply(plugin = "com.vanniktech.maven.publish")
+
+    group = "io.lemoncloud"
+    version = "0.0.5"
+
+    mavenPublishing {
+        publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+        pom {
+            name.set("Android Lemon Core")
+            description.set("This is Android utilities library for Lemon Cloud.")
+            url.set("https://github.com/lemoncloud-io/lemon-android-core")
+
+            licenses {
+                license {
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                }
+            }
+
+            developers {
+                developer {
+                    id.set("lemon")
+                    name.set("lemon")
+                    email.set("developer@lemoncloud.io")
+                }
+            }
+            scm {
+                url.set("https://github.com/lemoncloud-io/lemon-android-core") // GitHub 호스팅 서비스의 리포지토리 URL
+            }
+        }
+    }
 }
 
 allprojects {
