@@ -1,9 +1,9 @@
 name: Android Release Build
 on:
   pull_request:
-    branches: [ release/* ]
+    branches: [ _ ]
   push:
-    branches: [ release/* ]
+    branches: [ _ ]
 
 
 jobs:
@@ -27,6 +27,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
-        
+
       - name: Run unit tests
         run: ./gradlew test
