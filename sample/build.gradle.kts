@@ -14,5 +14,5 @@ android {
     namespace = "io.lemon.android.core"
 }
 dependencies {
-    implementation(project(":ui-architecture"))
+    implementation(project(":core-architecture"))
 }
