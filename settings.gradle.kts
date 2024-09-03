@@ -23,5 +23,5 @@ dependencyResolutionManagement {
 
 include(":sample")
 include(":android-component")
+include(":architecture-ui")
 include(":compose-util")
-include(":ui-architecture")

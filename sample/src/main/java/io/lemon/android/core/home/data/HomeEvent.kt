@@ -1,6 +1,6 @@
 package io.lemon.android.core.home.data
 
-import io.lemon.core.ui.architecture.BaseEvent
+import io.lemon.core.architecture.ui.BaseEvent
 
 sealed interface HomeEvent : BaseEvent {
 
