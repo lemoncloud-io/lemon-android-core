@@ -2,14 +2,13 @@
 
 안드로이드에서 공통적으로 사용될 모듈 저장소
 
-**Authors** : raine@lemoncloud.io
 
 ## Module
 
 | module            | description               |
 |-------------------|---------------------------|
 | android-component | android component 유틸리티    |
-| ui-architecture   | mvi 기반 architecture 인터페이스 |
+| architecture-ui   | mvi 기반 ui architecture 인터페이스 |
 | util-compose      | compose 유틸리티              |
 
 ### UI-Architecture
@@ -33,4 +32,3 @@
 
 Lemon Android Core Module에서 사용되는 라이브러리를 배포해야 할 상황이 존재할 경우 루트 디렉터리에 존재하는 `assemble_aar.sh` 스크립트 파일을 실행하면 됩니다.
 이때 생성되는 AAR들은 난독화가 적용되어 있습니다. 배포되는 aar들의 난독화 여부와 flavor 구성들을 수정하고 싶을 경우, `build-system` 모듈의 `Config` 를 확인하세요.
-
