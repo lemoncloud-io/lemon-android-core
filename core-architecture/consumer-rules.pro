@@ -1,0 +1,5 @@
+-dontwarn io.lemoncloud.core.architecture.ui.BaseEffect
+-dontwarn io.lemoncloud.core.architecture.ui.BaseEvent
+-dontwarn io.lemoncloud.core.architecture.ui.BaseState
+-dontwarn io.lemoncloud.core.architecture.ui.BaseError
+-dontwarn io.lemoncloud.core.architecture.ui.BaseViewModel
