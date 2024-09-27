@@ -16,7 +16,7 @@ import android.util.Log
  * @author raine@lemoncloud.io
  */
 interface BaseError {
-    val message: String
+    val message: String?
     val exception: Throwable?
 
     fun printErrorStackTrace() {
