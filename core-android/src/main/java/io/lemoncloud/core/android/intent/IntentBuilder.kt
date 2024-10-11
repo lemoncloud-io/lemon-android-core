@@ -78,6 +78,15 @@ open class IntentBuilder() {
     }
 
     /**
+     * [setType]
+     *
+     * type 설정
+     */
+    open fun setType(type: String) = apply {
+        intent.setType(type)
+    }
+
+    /**
      * [setAction]
      *
      * uri 형태 데이터 추가
