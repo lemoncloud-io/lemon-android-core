@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Parcelable
 import androidx.core.os.bundleOf
-import io.lemoncloud.core.android.model.MIMEType
+import io.lemoncloud.core.android.common.model.MIMEType
 import java.io.Serializable
 
 /**

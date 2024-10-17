@@ -1,4 +1,4 @@
-package io.lemoncloud.core.android.model
+package io.lemoncloud.core.android.common.model
 
 enum class MIMEType(val type: String) {
     All(type = "*/*"),

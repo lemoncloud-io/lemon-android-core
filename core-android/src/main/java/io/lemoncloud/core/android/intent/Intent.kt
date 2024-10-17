@@ -6,7 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import android.provider.Settings
-import io.lemoncloud.core.android.model.MIMEType
+import io.lemoncloud.core.android.common.model.MIMEType
 import java.io.Serializable
 
 /**
