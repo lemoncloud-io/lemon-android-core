@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Parcelable
 import androidx.core.os.bundleOf
+import io.lemoncloud.core.android.model.MIMEType
 import java.io.Serializable
 
 /**
@@ -14,7 +15,7 @@ import java.io.Serializable
  *
  * @author raine@lemoncloud.io
  */
-open class IntentBuilder() {
+class IntentBuilder() {
 
     private var intent: Intent = Intent()
 
@@ -22,40 +23,44 @@ open class IntentBuilder() {
         intent = Intent(context, `class`)
     }
 
+    constructor(intent: Intent) : this() {
+        this.intent = intent
+    }
+
     /**
      * [putExtras]
      *
      * intent 에 담아서 보낼 데이터인, extra를 정의합니다.
      */
-    open fun <T : Parcelable> putExtra(extra: T, key: String = DEFAULT_KEY) = apply {
+    fun <T : Parcelable> putExtra(extra: T, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun <T : Serializable> putExtra(extra: T, key: String = DEFAULT_KEY) = apply {
+    fun <T : Serializable> putExtra(extra: T, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun <T : Parcelable> putExtra(extra: ArrayList<T>, key: String = DEFAULT_KEY) = apply {
+    fun <T : Parcelable> putExtra(extra: ArrayList<T>, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun putExtra(extra: String, key: String = DEFAULT_KEY) = apply {
+    fun putExtra(extra: String, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun putExtra(extra: Long, key: String = DEFAULT_KEY) = apply {
+    fun putExtra(extra: Long, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun putExtra(extra: Int, key: String = DEFAULT_KEY) = apply {
+    fun putExtra(extra: Int, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun putExtra(extra: Float, key: String = DEFAULT_KEY) = apply {
+    fun putExtra(extra: Float, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
-    open fun putExtra(extra: Boolean, key: String = DEFAULT_KEY) = apply {
+    fun putExtra(extra: Boolean, key: String = DEFAULT_KEY) = apply {
         intent.putExtra(key, extra)
     }
 
@@ -64,7 +69,7 @@ open class IntentBuilder() {
      *
      * 번들 단위로 데이터 추가
      */
-    open fun putExtras(vararg pairs: Pair<String, Any?>) = apply {
+    fun putExtras(vararg pairs: Pair<String, Any?>) = apply {
         intent.putExtras(bundleOf(*pairs))
     }
 
@@ -73,7 +78,7 @@ open class IntentBuilder() {
      *
      * action 추가
      */
-    open fun setAction(action: String) = apply {
+    fun setAction(action: String) = apply {
         intent.setAction(action)
     }
 
@@ -82,7 +87,7 @@ open class IntentBuilder() {
      *
      * type 설정
      */
-    open fun setType(type: String) = apply {
+    fun setType(type: String) = apply {
         intent.setType(type)
     }
 
@@ -91,7 +96,7 @@ open class IntentBuilder() {
      *
      * uri 형태 데이터 추가
      */
-    open fun setData(uri: Uri) = apply {
+    fun setData(uri: Uri) = apply {
         intent.setData(uri)
     }
 
@@ -100,7 +105,7 @@ open class IntentBuilder() {
      *
      * 플래그 설정
      */
-    open fun setFlags(flag: Int) = apply {
+    fun setFlags(flag: Int) = apply {
         intent.setFlags(flag)
     }
 
@@ -109,7 +114,7 @@ open class IntentBuilder() {
      *
      * 플래그 추가
      */
-    open fun addFlags(flag: Int) = apply {
+    fun addFlags(flag: Int) = apply {
         intent.addFlags(flag)
     }
 
@@ -118,7 +123,7 @@ open class IntentBuilder() {
      *
      * IntentBuilder를 통해 조합한 intent 객체를 반환합니다.
      */
-    open fun build(): Intent = intent
+    fun build(): Intent = intent
 
     companion object {
         const val DEFAULT_KEY = "KEY"

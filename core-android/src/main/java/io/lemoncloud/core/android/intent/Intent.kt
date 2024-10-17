@@ -40,13 +40,23 @@ object Intent {
     fun intentBuilder(context: Context, `class`: Class<*>): IntentBuilder = IntentBuilder(context, `class`)
 
     /**
+     * [intentBuilder]
+     *
+     * 인텐트 빌더를 생성합니다.
+     *
+     * intent 타겟을 포함할 경우 헤당 메서드를 사용합니다.
+     *
+     * @see IntentBuilder
+     */
+    fun intentBuilder(intent: Intent): IntentBuilder = IntentBuilder(intent)
+
+    /**
      * [getParcelableExtraExt]
      *
      * intent extra에 포함되어 있는 parcelable 객체를 가져올 때 사용합니다.
      */
     fun <T : Parcelable> Intent.getParcelableExtraExt(key: String, `class`: Class<T>): T? {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            getParcelableExtra(key, `class`)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) getParcelableExtra(key, `class`)
         else getParcelableExtra(key)
     }
 
@@ -65,25 +75,44 @@ object Intent {
     }
 
     /**
-     * [getUrlIntent]
+     * [getViewUrlIntent]
      *
-     * url 주소를 포함한 intent를 생성합니다.
-     *
+     * url 주소의 데이터를 보여주는 intent를 생성합니다.
      * `startActivity()`와 연계하여 사용합니다.
+     *
+     *  @see Context.startActivity
      */
-    val getUrlIntent: (String) -> Intent =
-        { url -> intentBuilder().setAction(Intent.ACTION_VIEW).setData(Uri.parse(url)).build() }
+    fun getViewUrlIntent(url: String): Intent =
+        intentBuilder()
+            .setAction(Intent.ACTION_VIEW)
+            .setData(Uri.parse(url))
+            .build()
 
     /**
-     * [getSettingsIntent]
+     * [getApplicationDetailSettingsIntent]
      *
-     * 애플리케이션의 설정으로 이동하는 intent를 생성합니다.
-     *
+     * 애플리케이션 설정을 보여주는 intent를 생성합니다.
      * `startActivity()`와 연계하여 사용합니다.
+     *
+     *  @see Context.startActivity
      */
-    val getSettingsIntent: (Context) -> Intent = { context ->
-        intentBuilder().setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(
-            Uri.parse("package:${context.packageName}")
-        ).build()
-    }
+    fun getApplicationDetailSettingsIntent(context: Context) =
+        intentBuilder()
+            .setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            .setData(Uri.parse("package:${context.packageName}"))
+            .build()
+    /**
+     * [getSendTextIntent]
+     *
+     * 문자를 전송하는 intent를 생성합니다.
+     * `startActivity()`와 연계하여 사용합니다.
+     *
+     * @see Context.startActivity
+     */
+    fun getSendTextIntent(text: String) =
+        intentBuilder()
+            .setAction(Intent.ACTION_SEND)
+            .setType(MIMEType.Text.type)
+            .putExtras(Intent.EXTRA_TEXT to text)
+            .build()
 }
