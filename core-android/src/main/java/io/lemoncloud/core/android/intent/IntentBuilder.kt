@@ -92,6 +92,15 @@ class IntentBuilder() {
     }
 
     /**
+     * [setType]
+     *
+     * type 설정
+     */
+    fun setType(mimeType: MIMEType) = apply {
+        intent.setType(mimeType.type)
+    }
+
+    /**
      * [setAction]
      *
      * uri 형태 데이터 추가
