@@ -42,7 +42,12 @@ sealed interface HttpResponse<out T : Any?> {
             emit(call().runCatching {
                 if (isSuccessful) Success(data = body()!!)
                 else Fail(code = code(), error = null, message = errorBody()?.string())
-            }.getOrElse { Fail(error = it, message = it.cause?.message) })
+            }.getOrElse {
+                when (it) {
+                    is NullPointerException -> Fail(error = it, message = "Response body is null. If you received an empty body response, you can handle this by using createEmpty().")
+                    else -> Fail(error = it, message = it.cause?.message)
+                }
+            })
         }.flowOn(Dispatchers.IO)
 
         /**
