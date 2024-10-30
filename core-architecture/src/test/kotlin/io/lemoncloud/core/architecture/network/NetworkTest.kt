@@ -1,8 +1,7 @@
 package io.lemoncloud.core.architecture.network
 
 import com.google.common.truth.Truth
-import io.lemoncloud.core.architecture.domain.DataState
-import io.lemoncloud.core.architecture.network.HttpResponse.Companion.toDataState
+import io.lemoncloud.core.architecture.network.HttpResponse.Companion.toResult
 import io.lemoncloud.core.architecture.network.mock.MockService
 import io.lemoncloud.core.architecture.network.mock.MockDto
 import io.lemoncloud.core.architecture.network.mock.MockModel
@@ -113,41 +112,41 @@ class NetworkTest {
     }
 
     /**
-     *  Success [HttpResponse]를 [toDataState] 를 통해 변환하였을 때, 올바른 값을 가져오는지 확인합니다.
+     *   [HttpResponse.Success]를 [toResult] 를 통해 변환하였을 때, 올바른 값을 가져오는지 확인합니다.
      */
     @Test
-    fun toDataState_withSuccessHttpResponse_returnsSuccessModel() = runTest {
+    fun toResult_withSuccessHttpResponse_returnsSuccessModel() = runTest {
         val httpResponse = HttpResponse.Success(data = testDto)
 
-        val dataState = httpResponse.toDataState()
+        val result = httpResponse.toResult()
 
-        Truth.assertThat(dataState).isInstanceOf(DataState.Success::class.java)
-        Truth.assertThat((dataState as DataState.Success).data).isEqualTo(testModel)
+        Truth.assertThat(result.isSuccess).isTrue()
+        Truth.assertThat(result.getOrElse { it }).isEqualTo(testModel)
     }
 
     /**
-     *  Fail [HttpResponse]를 [toDataState] 를 통해 변환하였을 때, 올바른 값을 가져오는지 확인합니다.
+     *  [HttpResponse.Fail]를 [toResult] 를 통해 변환하였을 때, 올바른 값을 가져오는지 확인합니다.
      */
     @Test
-    fun toDataState_withFailHttpResponse_returnsFail() = runTest {
-        val httpResponse = HttpResponse.Fail<MockDto>()
+    fun toResult_withFailHttpResponse_returnsFail() = runTest {
+        val httpResponse = HttpResponse.Fail<MockDto>(Throwable())
 
-        val dataState = httpResponse.toDataState()
+        val result = httpResponse.toResult()
 
-        Truth.assertThat(dataState).isInstanceOf(DataState.Fail::class.java)
-        Truth.assertThat((dataState as DataState.Fail).exceptions).isEqualTo(null)
+        Truth.assertThat(result.isFailure).isTrue()
+        Truth.assertThat(result.getOrNull()).isEqualTo(null)
     }
 
     /**
-     *  Success [HttpResponse]를 [toDataState]와 매퍼를 통해 변환 하였을 때, 올바른 모델 값을 가져오는지 확인합니다.
+     *  [HttpResponse.Success]를 [toResult]와 매퍼를 통해 변환 하였을 때, 올바른 모델 값을 가져오는지 확인합니다.
      */
     @Test
-    fun toDataState_withSuccessHttpResponseAndMapper_returnsSuccessModel() = runTest {
+    fun toResult_withSuccessHttpResponseAndMapper_returnsSuccessModel() = runTest {
         val httpResponse = HttpResponse.Success(data = testDto)
 
-        val dataState = httpResponse.toDataState { Unit }
+        val result = httpResponse.toResult { Unit }
 
-        Truth.assertThat(dataState).isInstanceOf(DataState.Success::class.java)
-        Truth.assertThat((dataState as DataState.Success).data).isEqualTo(Unit)
+        Truth.assertThat(result.isSuccess).isTrue()
+        Truth.assertThat(result.getOrElse { it }).isEqualTo(Unit)
     }
 }
