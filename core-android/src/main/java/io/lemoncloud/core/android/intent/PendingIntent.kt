@@ -33,7 +33,7 @@ object PendingIntent {
      * [PendingIntent.FLAG_IMMUTABLE]
      * PendingIntent를 수정할 수 없도록 함 (보안 이슈)
      */
-    private fun getActivityPendingIntent(
+    fun getActivityPendingIntent(
         context: Context,
         intent: Intent,
         requestCode: Int,
@@ -60,7 +60,7 @@ object PendingIntent {
      * [PendingIntent.FLAG_IMMUTABLE]
      * PendingIntent를 수정할 수 없도록 함 (보안 이슈)
      */
-    private fun getActivitiesPendingIntent(
+    fun getActivitiesPendingIntent(
         context: Context,
         intents: Array<Intent>,
         requestCode: Int,
@@ -87,7 +87,7 @@ object PendingIntent {
      * [PendingIntent.FLAG_IMMUTABLE]
      * PendingIntent를 수정할 수 없도록 함 (보안 이슈)
      */
-    private fun getBroadcastPendingIntent(
+    fun getBroadcastPendingIntent(
         context: Context,
         intent: Intent,
         requestCode: Int,
@@ -114,7 +114,7 @@ object PendingIntent {
      * [PendingIntent.FLAG_IMMUTABLE]
      * PendingIntent를 수정할 수 없도록 함 (보안 이슈)
      */
-    private fun getServicePendingIntent(
+    fun getServicePendingIntent(
         context: Context,
         intent: Intent,
         requestCode: Int,
