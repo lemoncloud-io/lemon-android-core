@@ -5,6 +5,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.Intent.FLAG_ACTIVITY_NO_HISTORY
 import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import io.lemoncloud.core.android.intent.IntentBuilder
@@ -57,35 +58,47 @@ class ActivityLauncher<T : Activity>(
     }
 
     /**
-     * [startActivityNoHistory]
+     * [startActivityWithNewTask]
+     *
+     * 활동을 새로운 테스크로 시작합니다. 단, 기존 태스크 중에 동일 Affinity를 가진 테스크가 있을 경우 해당 테스크에서 활동이 실행됩니다.
+     */
+    fun startActivityWithNewTask(context: Context) {
+        context.startActivity(
+            intent.apply { setFlags(FLAG_ACTIVITY_NEW_TASK) }
+        )
+    }
+
+    /**
+     * [startActivityWithNoHistory]
      *
      * 활동이 테스크 스택에 쌓이지 않고 시작됩니다.
      */
-    fun startActivityNoHistory(context: Context) {
+    fun startActivityWithNoHistory(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_NO_HISTORY) }
+            intent.apply { setFlags(FLAG_ACTIVITY_NO_HISTORY) }
         )
     }
 
     /**
-     * [startActivityClearTop]
+     * [startActivityWithClearTop]
      *
      * 활동을 테스크 스택 최상위로 올리고 그 사이 테스크 스택을 전부 제거합니다.
      */
-    fun startActivityClearTop(context: Context) {
+    fun startActivityWithClearTop(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_CLEAR_TOP) }
+            intent.apply { setFlags(FLAG_ACTIVITY_CLEAR_TOP) }
         )
     }
 
     /**
-     * [startActivitySingleTop]
+     * [startActivityWithSingleTop]
      *
-     * 활동을 태스크 스택 최상위로 올림 만약 테스크 내에 동일한 활동이 존재하지 않을경우, 새로 생성합니다.
+     * 활동을 태스크 스택 최상위로 올립니다.
+     * 만약 테스크 내에 동일한 활동이 존재하지 않을 경우, 새로 생성합니다.
      */
-    fun startActivitySingleTop(context: Context) {
+    fun startActivityWithSingleTop(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_SINGLE_TOP) }
+            intent.apply { setFlags(FLAG_ACTIVITY_SINGLE_TOP) }
         )
     }
 }
