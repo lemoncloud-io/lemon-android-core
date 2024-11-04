@@ -27,6 +27,9 @@ object FlowExtensions {
         }
     }
 
+    /**
+     * 다수의 Flow를 결합하는 익스텐션
+     */
     @Suppress("UNCHECKED_CAST")
     fun <T1, T2, T3, T4, T5, T6, R> combine(
         flow: Flow<T1>,
@@ -47,6 +50,9 @@ object FlowExtensions {
         )
     }
 
+    /**
+     * 다수의 Flow를 결합하는 익스텐션
+     */
     @Suppress("UNCHECKED_CAST")
     fun <T1, T2, T3, T4, T5, T6, T7, R> combine(
         flow: Flow<T1>,
@@ -69,6 +75,9 @@ object FlowExtensions {
         )
     }
 
+    /**
+     * [Result] 타입의 플로우를 결합하는 익스텐션
+     */
     fun <T1, T2> combineResultFlow(
         flow: Flow<Result<T1>>,
         flow2: Flow<Result<T2>>,
@@ -80,6 +89,9 @@ object FlowExtensions {
         }
     )
 
+    /**
+     * [Result] 타입의 플로우를 결합하는 익스텐션
+     */
     fun <T1, T2, T3> combineResultFlow(
         flow: Flow<Result<T1>>,
         flow2: Flow<Result<T2>>,
