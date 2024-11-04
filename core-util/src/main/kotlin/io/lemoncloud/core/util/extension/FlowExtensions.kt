@@ -3,6 +3,7 @@ package io.lemoncloud.core.util.extension
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 
@@ -69,4 +70,28 @@ object FlowExtensions {
             args[6] as T7,
         )
     }
+
+    fun <T1, T2> combineResultFlow(
+        flow: Flow<Result<T1>>,
+        flow2: Flow<Result<T2>>,
+    ) = combineTransform(
+        flow = flow,
+        flow2 = flow2,
+        transform = { a: Result<T1>, b: Result<T2> ->
+            emit(runCatching { a.getOrThrow() to b.getOrThrow() })
+        }
+    )
+
+    fun <T1, T2, T3> combineResultFlow(
+        flow: Flow<Result<T1>>,
+        flow2: Flow<Result<T2>>,
+        flow3: Flow<Result<T3>>,
+    ) = combineTransform(
+        flow = flow,
+        flow2 = flow2,
+        flow3 = flow3,
+        transform = { a: Result<T1>, b: Result<T2>, c: Result<T3> ->
+            emit(runCatching { Triple(a.getOrThrow(), b.getOrThrow(), c.getOrThrow()) })
+        }
+    )
 }
