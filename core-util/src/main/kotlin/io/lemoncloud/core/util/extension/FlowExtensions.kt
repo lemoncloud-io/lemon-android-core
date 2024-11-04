@@ -17,9 +17,7 @@ object FlowExtensions {
      * @return current Timestamp and current Count
      */
     fun tickFlow(
-        interval: Long,
-        timeUnit: TimeUnit,
-        tickCount: Long = Long.MAX_VALUE
+        interval: Long, timeUnit: TimeUnit, tickCount: Long = Long.MAX_VALUE
     ): Flow<Pair<Long, Long>> = flow {
         var currentCount = 0L
         while (tickCount > currentCount) {
