@@ -11,6 +11,9 @@ class TestExtPlugin : Plugin<Project> {
             dependencies {
                 add("implementation", versionCatalog.findLibrary("junit").get())
                 add("implementation", versionCatalog.findLibrary("truth").get())
+                add("implementation", versionCatalog.findLibrary("dexmaker-mockito").get())
+                add("implementation", versionCatalog.findLibrary("mockk").get())
+                add("implementation", versionCatalog.findLibrary("mockk-android").get())
             }
         }
     }
