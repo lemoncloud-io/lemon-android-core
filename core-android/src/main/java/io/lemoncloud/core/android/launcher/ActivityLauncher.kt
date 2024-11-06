@@ -5,17 +5,15 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.Intent.FLAG_ACTIVITY_NO_HISTORY
 import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import io.lemoncloud.core.android.intent.IntentBuilder
+import io.lemoncloud.core.android.intent.IntentUtils
 import kotlin.reflect.KClass
 
 /**
- * [ActivityLauncher]
- *
- * 활동(Activity) 관련한 초기화 및 시작 작업을 도와주는 클래스
- *
- * @author raine@lemoncloud.io
+ * 활동(Activity) 관련한 초기화 및 시작 작업을 도와줍니다.
  */
 class ActivityLauncher<T : Activity>(
     private val context: Context,
@@ -24,19 +22,15 @@ class ActivityLauncher<T : Activity>(
     private var intent: Intent = Intent(context, activityClass.java)
 
     /**
-     * [intentBuilder]
-     *
      * [Service] 에 대한 Intent를 작업하기 위한 [IntentBuilder]를 생성합니다.
      *
      * [IntentBuilder]를 통해 생성한 `Intent` 를 [updateIntent]를 사용하여 업데이트할 수 있습니다.
      *
      * @see IntentBuilder
      */
-    fun intentBuilder(): IntentBuilder = IntentBuilder(context, activityClass.java)
+    fun intentBuilder(): IntentBuilder = IntentUtils.intentBuilder(context, activityClass.java)
 
     /**
-     * [updateIntent]
-     *
      * 인텐트에 별도 설정을 추가하여 업데이트 해야하는 상황에서 사용합니다
      *
      * [intentBuilder] 를 통해 IntentBuilder를 연결할 수 있습니다.
@@ -48,8 +42,6 @@ class ActivityLauncher<T : Activity>(
     }
 
     /**
-     * [startActivity]
-     *
      * 활동을 시작합니다.
      */
     fun startActivity() {
@@ -57,35 +49,39 @@ class ActivityLauncher<T : Activity>(
     }
 
     /**
-     * [startActivityNoHistory]
-     *
+     * 활동을 새로운 테스크로 시작합니다. 단, 기존 태스크 중에 동일 Affinity를 가진 테스크가 있을 경우 해당 테스크에서 활동이 실행됩니다.
+     */
+    fun startActivityWithNewTask(context: Context) {
+        context.startActivity(
+            intent.apply { setFlags(FLAG_ACTIVITY_NEW_TASK) }
+        )
+    }
+
+    /**
      * 활동이 테스크 스택에 쌓이지 않고 시작됩니다.
      */
-    fun startActivityNoHistory(context: Context) {
+    fun startActivityWithNoHistory(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_NO_HISTORY) }
+            intent.apply { setFlags(FLAG_ACTIVITY_NO_HISTORY) }
         )
     }
 
     /**
-     * [startActivityClearTop]
-     *
      * 활동을 테스크 스택 최상위로 올리고 그 사이 테스크 스택을 전부 제거합니다.
      */
-    fun startActivityClearTop(context: Context) {
+    fun startActivityWithClearTop(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_CLEAR_TOP) }
+            intent.apply { setFlags(FLAG_ACTIVITY_CLEAR_TOP) }
         )
     }
 
     /**
-     * [startActivitySingleTop]
-     *
-     * 활동을 태스크 스택 최상위로 올림 만약 테스크 내에 동일한 활동이 존재하지 않을경우, 새로 생성합니다.
+     * 활동을 태스크 스택 최상위로 올립니다.
+     * 만약 테스크 내에 동일한 활동이 존재하지 않을 경우, 새로 생성합니다.
      */
-    fun startActivitySingleTop(context: Context) {
+    fun startActivityWithSingleTop(context: Context) {
         context.startActivity(
-            intent.also { it.setFlags(FLAG_ACTIVITY_SINGLE_TOP) }
+            intent.apply { setFlags(FLAG_ACTIVITY_SINGLE_TOP) }
         )
     }
 }
