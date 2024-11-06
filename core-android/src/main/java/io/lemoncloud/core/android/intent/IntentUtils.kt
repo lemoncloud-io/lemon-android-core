@@ -94,4 +94,16 @@ object IntentUtils {
             .setType(MIMEType.Text.type)
             .putExtras(Intent.EXTRA_TEXT to text)
             .build()
+
+    /**
+     * 스토어로 이동하는 intent를 생성합니다.
+     * `startActivity()`와 연계하여 사용합니다.
+     *
+     * @see Context.startActivity
+     */
+    fun getMarketIntent(context: Context): Intent =
+        intentBuilder()
+            .setAction(Intent.ACTION_VIEW)
+            .setData(Uri.parse("market://details?id=${context.packageName}"))
+            .build()
 }
