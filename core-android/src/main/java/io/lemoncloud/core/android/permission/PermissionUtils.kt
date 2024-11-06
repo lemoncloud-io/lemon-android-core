@@ -7,10 +7,10 @@ import androidx.annotation.IntRange
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-object Permission {
+object PermissionUtils {
 
     /**
-     * 권한 승인 여부 확인
+     * 권한 승인 여부를 확인합니다.
      * @param context
      * @param permission 권한
      */
@@ -18,15 +18,15 @@ object Permission {
         ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
     /**
-     * 권한 승인 여부 확인
+     * 전체 권한 승인 여부를 확인합니다.
      * @param context
      * @param permissions 권한 목록
      */
-    fun checkPermissions(context: Context, permissions: List<String>): Boolean =
-        permissions.all { checkPermission(context, it) }
+    fun checkPermissions(context: Context, permissions: List<String>): List<Boolean> =
+        permissions.map { checkPermission(context, it) }
 
     /**
-     * 권한 요청
+     * 권한을 요청합니다.
      * @param activity
      * @param permissions 요청할 권한 목록
      */
@@ -37,7 +37,7 @@ object Permission {
     ): Unit = ActivityCompat.requestPermissions(activity, permissions, requestCode)
 
     /**
-     * 권한 요청
+     * 권한을 요청
      * @param activity
      * @param permissions 요청할 권한 목록
      */

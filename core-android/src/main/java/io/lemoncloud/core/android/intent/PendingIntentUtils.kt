@@ -5,18 +5,12 @@ import android.content.Context
 import android.content.Intent
 
 /**
- * [PendingIntent]
- *
- * PendingIntent 관련 유틸리티
- *
- * @author raine@lemoncloud.io
+ * PendingIntent 유틸리티
  */
-object PendingIntent {
+object PendingIntentUtils {
 
     /**
-     * [getActivityPendingIntent]
-     *
-     * Activity를 포함한 pendingIntent 생성
+     * Activity를 포함한 pendingIntent 생성합니다.
      *
      * [PendingIntent.FLAG_CANCEL_CURRENT]
      * 이전에 생성한 PendingIntent 취소 후 새로 생성함
@@ -41,9 +35,7 @@ object PendingIntent {
     ): PendingIntent = PendingIntent.getActivity(context, requestCode, intent, flags)
 
     /**
-     * [getActivitiesPendingIntent]
-     *
-     * 여러 개의 Activity를 포함한 pendingIntent 생성
+     * 여러 개의 Activity를 포함한 pendingIntent 생성합니다.
      *
      * [PendingIntent.FLAG_CANCEL_CURRENT]
      * 이전에 생성한 PendingIntent 취소 후 새로 생성함
@@ -68,9 +60,7 @@ object PendingIntent {
     ): PendingIntent = PendingIntent.getActivities(context, requestCode, intents, flags)
 
     /**
-     * [getBroadcastPendingIntent]
-     *
-     * Broadcast를 포함한 pendingIntent 생성
+     * Broadcast를 포함한 pendingIntent 생성합니다.
      *
      * [PendingIntent.FLAG_CANCEL_CURRENT]
      * 이전에 생성한 PendingIntent 취소 후 새로 생성함
@@ -95,9 +85,7 @@ object PendingIntent {
     ): PendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, flags)
 
     /**
-     * [getServicePendingIntent]
-     *
-     * Serivce를 포함한 pendingIntent 생성
+     * Serivce를 포함한 pendingIntent 생성합니다.
      *
      * [PendingIntent.FLAG_CANCEL_CURRENT]
      * 이전에 생성한 PendingIntent 취소 후 새로 생성함
@@ -112,7 +100,7 @@ object PendingIntent {
      * 이미 생성된 PendingIntent 가 있을 경우 extraData를 교체함
      *
      * [PendingIntent.FLAG_IMMUTABLE]
-     * PendingIntent를 수정할 수 없도록 함 (보안 이슈)
+     * PendingIntent를 수정할 수 없도록 함
      */
     fun getServicePendingIntent(
         context: Context,
