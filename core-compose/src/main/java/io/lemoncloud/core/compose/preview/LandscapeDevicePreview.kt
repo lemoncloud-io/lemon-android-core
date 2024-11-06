@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 /**
- * A LandscapeDevicePreview annotation for displaying a @[Composable] method in a component using a phone device in landscape mode.
- */
+* landscape 모드의 디바이스 화면에서  @[Composable] 컴포넌트를 보여주기 위한 애노테이션
+*/
 @Retention(AnnotationRetention.BINARY)
 @Target(
     AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION

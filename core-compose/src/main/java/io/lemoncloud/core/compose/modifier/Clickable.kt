@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * 클릭 인터렉션이 연속적으로 발생하는 것을 방지하는 확장자
  */
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.throttleClickable(
@@ -49,7 +49,7 @@ fun Modifier.throttleClickable(
 }
 
 /**
- * Click interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * 클릭 인터렉션이 연속적으로 발생하는 것을 방지하는 확장자
  */
 fun Modifier.throttleClickable(
     onClick: () -> Unit,
@@ -84,7 +84,7 @@ fun Modifier.throttleClickable(
 }
 
 /**
- * Click interaction 중 발생하는 시각 이펙트를 제거하는 확장자
+ * 클릭 인터렉션 중 기본적으로 발생하는 시각 이펙트를 제거하는 확장자
  */
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.noRippleClickable(
