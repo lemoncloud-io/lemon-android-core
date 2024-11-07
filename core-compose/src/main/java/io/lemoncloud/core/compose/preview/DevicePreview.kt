@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
 
 /**
- * A PhoneDevicePreview annotation for displaying a @[Composable] method in a component using a phone device.
+ * 일반적인 디바이스 화면에서  @[Composable] 컴포넌트를 보여주기 위한 애노테이션
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(
@@ -44,7 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 annotation class PhoneDevicePreview
 
 /**
- * A FoldableDevicePreview annotation for displaying a @[Composable] method in a component using a foldable device.
+ * 폴더블 디바이스 화면에서  @[Composable] 컴포넌트를 보여주기 위한 애노테이션
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(
@@ -68,7 +68,7 @@ annotation class PhoneDevicePreview
 annotation class FoldableDevicePreview
 
 /**
- * A TabletDevicePreview annotation for displaying a @[Composable] method in a component using a tablet device.
+ * 테블릿 디바이스 화면에서  @[Composable] 컴포넌트를 보여주기 위한 애노테이션
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(
@@ -91,9 +91,8 @@ annotation class FoldableDevicePreview
 annotation class TabletDevicePreview
 
 /**
- * A MultiDevicePreview annotation for displaying a @[Composable] method in a component using the screen sizes of three different reference devices.
+ * 여러 형태의 디바이스 화면에서 @[Composable] 컴포넌트를 보여주기 위한 애노테이션
  */
-
 @PhoneDevicePreview
 @FoldableDevicePreview
 @TabletDevicePreview

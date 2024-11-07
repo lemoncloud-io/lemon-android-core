@@ -1,9 +1,10 @@
 # Core-Architecture
+
 안드로이드 프로젝트 구조를 효과적으로 빌딩하기 위한 아키텍처 라이브러리.
-대표적으로 UI 레이어에서 MVI 기반의 아키텍처를 통해 State Event Effect를 제어하여 사용자와 UI간의 상태 및 이벤트 흐름과 사이에 발생하는 이펙트를 효과적으로
-처리할 수 있습니다.
+
 
 ### UI
+UI 레이어에서 MVI 기반의 아키텍처를 통해 State Event Effect를 제어하여 사용자와 UI간의 상태 및 이벤트 흐름과 사이에 발생하는 이펙트를 효과적으로 처리할 수 있습니다.
 
 ![ui-architecture](assets/ui-architecture.jpeg)
 
@@ -15,3 +16,10 @@
 6. override 되는 `createConfig()` 메서드를 바탕으로 Config 초기 값 설정
 7. `BaseViewModel`에 정의한 bind 메서드를 사용하여 event, effect, error 플로우 제어
 8. state의 경우 자체 `StateFlow`를 관측하여 UI 상태 감지 가능
+
+### Network
+Network data 레이어에서 네트워크 데이터를 효과적으로 처리할 수 있습니다.
+
+
+### Domain
+Domain 레이어에서 비즈니스 로직을 효과적으로 처리할 수 있습니다.

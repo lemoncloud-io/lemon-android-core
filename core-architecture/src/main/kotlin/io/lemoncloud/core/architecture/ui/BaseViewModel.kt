@@ -24,8 +24,6 @@ import kotlinx.coroutines.launch
  *
  * UI 내 state, event, effect를 처리하기 위한 MVI 구조의 뷰 모델 아키텍처
  *
- *
- * @author raine@lemoncloud.io
  */
 abstract class BaseViewModel<STATE : BaseState, EVENT : BaseEvent, EFFECT : BaseEffect, ERROR : BaseError>() :
     ViewModel() {

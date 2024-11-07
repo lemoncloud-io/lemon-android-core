@@ -13,10 +13,9 @@ import android.util.Log
  *
  * @property message 오류 메시지
  * @property exception 오류 정보 (특정한 Throwable이 존재하지 않을 경우 null을 사용할 수 있습니다.)
- * @author raine@lemoncloud.io
  */
 interface BaseError {
-    val message: String
+    val message: String?
     val exception: Throwable?
 
     fun printErrorStackTrace() {

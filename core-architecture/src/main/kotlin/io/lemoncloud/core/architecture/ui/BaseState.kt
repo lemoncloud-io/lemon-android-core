@@ -12,7 +12,6 @@ package io.lemoncloud.core.architecture.ui
  * [BaseViewModel.state] 를 관측하여 상태를 UI 상에 반영할 수 있습니다.
  *
  * @property isLoading
- * @author raine@lemoncloud.io
  */
 interface BaseState{
     val isLoading : Boolean

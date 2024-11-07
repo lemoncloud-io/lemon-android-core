@@ -11,6 +11,5 @@ package io.lemoncloud.core.architecture.ui
  *
  * [BaseViewModel.onEvent] event 플로우에 이벤트를 전달합니다.
  *
- * @author raine@lemoncloud.io
  **/
 interface BaseEvent

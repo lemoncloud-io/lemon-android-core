@@ -11,6 +11,5 @@ package io.lemoncloud.core.architecture.ui
  *
  * [BaseViewModel.effect] 를 수집하여(collect) 이펙트를 처리할 수 있습니다.
  *
- * @author raine@lemoncloud.io
  */
 interface BaseEffect
