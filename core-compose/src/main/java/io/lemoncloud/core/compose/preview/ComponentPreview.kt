@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 /**
- * A ComponentPreview annotation for displaying a @[Composable] method in a component.
+ * @[Composable] 컴포넌트를 보여주기 위한 애노테이션
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.FUNCTION)

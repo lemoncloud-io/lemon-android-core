@@ -10,11 +10,12 @@ import retrofit2.Response
 
 /**
  * retrofit 을 통해 반환되는 네트워크 응답 개체를 구조화합니다.
+ *
  * 네트워크 통신 결과에 따라 `Success` 또는 `Fail`이 반환 됩니다.
  */
 sealed interface HttpResponse<out T : Any?> {
     /**
-     * 네트워크 통신 성공 시에 반환된다
+     * 네트워크 통신 성공 시에 반환됩니다
      * @property data 네트워크 통신 결과 데이터
      */
     class Success<T>(
@@ -22,7 +23,7 @@ sealed interface HttpResponse<out T : Any?> {
     ) : HttpResponse<T>
 
     /**
-     * 네트워크 통신 실패 시에 반환된다
+     * 네트워크 통신 실패 시에 반환됩니다
      * @property code 네트워크 통신 결과 코드
      * @property error 네트워크 통신 결과 에러
      */
@@ -35,7 +36,7 @@ sealed interface HttpResponse<out T : Any?> {
 
         /**
          * [Response]를 반환하는 `Retrofit`의 통신 메서드를 전달받아 [HttpResponse] 타입의 Flow로 변환합니다.
-         * @param call 네트워크 통신 메서드 `Response`형태의 반환 값을 전달받아야만한다.
+         * @param call 네트워크 통신 메서드 `Response`형태의 반환 값을 전달받아야만 한다.
          */
         fun <T> create(call: (suspend () -> Response<T>)): Flow<HttpResponse<T>> = flow {
             emit(call().runCatching {
@@ -53,18 +54,19 @@ sealed interface HttpResponse<out T : Any?> {
         }.flowOn(Dispatchers.IO)
 
         /**
-         * [Response]를 반환하는 `Retrofit`의 통신 메서드를 전달받아 Unit을 포함한 [HttpResponse] 타입의 Flow로 변환합니다.
+         * [Response]를 반환하는 메서드를 전달한 뒤, Unit을 포함한 [HttpResponse] 타입의 Flow로 변환합니다.
          * [Response]에 상관 없이, Unit을 반환하고 싶은 경우에 사용할 수 있습니다.
-         * 예를 들어 `HEAD` 메서드와 같이 특정한 반환값이 없는 경우 사용합니다.
+         *
+         * 예를 들어, `HEAD` 메서드와 같이 특정한 반환 값이 없는 경우 사용합니다.
          * ```
          * interface MockService {
          *     @HEAD("mock")
          *     suspend fun head(): Response<Void>
          * }
          * ```
-         * 서비스가 위와 같이 정의되었다고 가정 하였을 때, [HttpResponse] 를 호출하는 방법은 아래와 같습니다.
+         * 서비스가 위와 같이 정의되었다고 가정 하였을 때, [HttpResponse] 인터페이스를 생성하는 방법은 아래와 같습니다.
          * ```
-         * val response = HttpResponse.createEmpty { networkResponse }.first()
+         * val response = HttpResponse.createEmpty { networkResponse }
          * ```
          */
         fun <T> createEmpty(call: (suspend () -> Response<T>)): Flow<HttpResponse<Unit>> = flow {

@@ -11,6 +11,7 @@ Lemon Android Core는 안드로이드에서 공통적으로 사용될 모듈 저
 | core-android      | android 제어 및 유틸리티  | ![Maven Central Version](https://img.shields.io/maven-central/v/io.lemoncloud/core-android)      |
 | core-architecture | architecture 인터페이스 | ![Maven Central Version](https://img.shields.io/maven-central/v/io.lemoncloud/core-architecture) |
 | core-compose      | compose 유틸리티       | ![Maven Central Version](https://img.shields.io/maven-central/v/io.lemoncloud/core-compose)      |
+| core-util         | 유틸리티 및 익스텐션        | ![Maven Central Version](https://img.shields.io/maven-central/v/io.lemoncloud/core-util)         |
 
 
 ### Core-Android
@@ -22,20 +23,24 @@ implementation("io.lemoncloud:core-android:<version>")
 
 ### Core-Architecture
 
-안드로이드 프로젝트 구조를 효과적으로 빌딩하기 위한 아키텍처 라이브러리.
-대표적으로 UI 레이어에서 MVI 기반의 아키텍처를 통해 State Event Effect를 제어하여 사용자와 UI간의 상태 및 이벤트 흐름과 사이에 발생하는 이펙트를 효과적으로
-처리할 수 있습니다.
+안드로이드 프로젝트 구조를 효과적으로 빌딩하기 위한 아키텍처 모듈
 ```
 implementation("io.lemoncloud:core-architecture:<version>")
 ```
 
 ### Core-Compose
 
-안드로이드 `Compose` 에서 사용되는 유틸리티 집합 라이브러리
+안드로이드 `Compose` 에서 사용되는 유틸리티 집합
 ```
 implementation("io.lemoncloud:core-compose:<version>")
 ```
 
+### Core-Util
+
+유틸리티 및 익스텐션 집합
+```
+implementation("io.lemoncloud:core-util:<version>")
+```
 
 
 
@@ -51,7 +56,7 @@ sh init_lint_settings.sh
 
 ### AAR 배포
 
-Lemon Android Core Module에서 사용되는 라이브러리를 AAR 패키지로 배포해야 할 상황이 존재할 경우 루트 디렉터리에 존재하는 `assemble_aar.sh` 스크립트 파일을 실행하면 됩니다.
+Lemon Android Core 모듈에서 사용되는 라이브러리를 AAR 패키지로 배포해야 할 상황이 존재할 경우 루트 디렉터리에 존재하는 `assemble_aar.sh` 스크립트 파일을 실행하면 됩니다.
 
 ```
 sh assemble_aar.sh

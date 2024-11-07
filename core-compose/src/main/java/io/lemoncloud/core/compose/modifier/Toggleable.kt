@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
- * Toggle interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * 토글 인터렉션이 연속적으로 발생하는 것을 방지하는 확장자
  */
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.throttleToggleable(
@@ -49,7 +49,7 @@ fun Modifier.throttleToggleable(
 }
 
 /**
- * Toggle interaction 이 연속적으로 발생하는 것을 방지하는 확장자
+ * 토글 인터렉션이 연속적으로 발생하는 것을 방지하는 확장자
  */
 fun Modifier.throttleToggleable(
     value: Boolean,
@@ -84,7 +84,7 @@ fun Modifier.throttleToggleable(
 }
 
 /**
- * Toggle interaction 중 발생하는 시각 이펙트를 제거하는 확장자
+ * 토글 인터렉션 수행 중 발생하는 시각 이펙트를 제거하는 확장자
  */
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 fun Modifier.noRippleToggleable(
