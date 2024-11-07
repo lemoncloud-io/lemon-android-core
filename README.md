@@ -67,9 +67,12 @@ sh assemble_aar.sh
 라이브러리를 Maven-Central 저장소에 배포를 하기 위해서는 아래와 같은 절차를 수행해야 합니다.
 1. Maven Central 계정 로그인
 2. Account 메뉴로 이동 후 Generate User Token 을 통해 토큰 발행
-3. `./gradle.properties` 내 토큰 정보 기입 (`mavenCentralUsername` , `mavenCentralPassword`, ...)
-4. 배포버전 확인 후 아래 명령어 실행
+3. gpg key 발급 및 공개키 서버 업로드 수행 (외부 자료 참고)
+4. gpg key 에 대한 secret key 생성 (외부 자료 참고)
+5. `./gradle.properties` 내 토큰 정보 및 signing 에 대한 public key,secret 기입 (`mavenCentralUsername` , `mavenCentralPassword`, `signing.keyId`, ...)
+6. 배포 버전 확인 후 아래 명령어 실행 (project 수준에 존재하는 gradle.kts의 version 필드를 수정하면, 통합적으로 모든 라이브러리 버전 업데이트 가능)
     ```
     ./gradlew publishAllPublicationsToMavenCentralRepository
     ```
-5. Maven Central Account 메뉴에서 주기적으로 Revoke User Token 실행
+7. `VALIDATED` 될 경우 퍼블리싱 진행
+8. Maven Central Account 메뉴에서 Revoke User Token 실행
