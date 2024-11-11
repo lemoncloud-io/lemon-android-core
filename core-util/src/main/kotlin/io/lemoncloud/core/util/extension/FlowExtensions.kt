@@ -53,34 +53,4 @@ object FlowExtensions {
             args[6] as T7,
         )
     }
-
-    /**
-     * [Result] 타입의 플로우를 결합하는 익스텐션
-     */
-    fun <T1, T2> combineResultFlow(
-        flow: Flow<Result<T1>>,
-        flow2: Flow<Result<T2>>,
-    ) = combineTransform(
-        flow = flow,
-        flow2 = flow2,
-        transform = { a: Result<T1>, b: Result<T2> ->
-            emit(runCatching { a.getOrThrow() to b.getOrThrow() })
-        }
-    )
-
-    /**
-     * [Result] 타입의 플로우를 결합하는 익스텐션
-     */
-    fun <T1, T2, T3> combineResultFlow(
-        flow: Flow<Result<T1>>,
-        flow2: Flow<Result<T2>>,
-        flow3: Flow<Result<T3>>,
-    ) = combineTransform(
-        flow = flow,
-        flow2 = flow2,
-        flow3 = flow3,
-        transform = { a: Result<T1>, b: Result<T2>, c: Result<T3> ->
-            emit(runCatching { Triple(a.getOrThrow(), b.getOrThrow(), c.getOrThrow()) })
-        }
-    )
 }
