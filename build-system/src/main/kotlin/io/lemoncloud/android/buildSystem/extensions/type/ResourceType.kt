@@ -13,9 +13,9 @@ data class ResourceType(
     val value: Any
 ) {
     enum class Type(val field: String) {
-        StringType(field = "string"),
-        IntType(field = "int"),
-        BooleanType(field = "boolean")
+        STRING(field = "string"),
+        INT(field = "int"),
+        BOOLEAN(field = "boolean")
     }
 
 }

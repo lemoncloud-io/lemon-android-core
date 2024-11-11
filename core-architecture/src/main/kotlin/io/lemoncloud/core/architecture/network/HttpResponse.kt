@@ -4,7 +4,7 @@ import io.lemoncloud.core.architecture.error.NetworkException.HttpException
 import io.lemoncloud.core.architecture.error.NetworkException.ResponseNullPointerException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 
@@ -38,20 +38,23 @@ sealed interface HttpResponse<out T : Any?> {
          * [Response]를 반환하는 `Retrofit`의 통신 메서드를 전달받아 [HttpResponse] 타입의 Flow로 변환합니다.
          * @param call 네트워크 통신 메서드 `Response`형태의 반환 값을 전달받아야만 한다.
          */
-        fun <T> create(call: (suspend () -> Response<T>)): Flow<HttpResponse<T>> = flow {
-            emit(call().runCatching {
-                if (isSuccessful) Success(data = body()!!)
-                else Fail(
-                    code = code(),
-                    error = HttpException(message = ("[${code()}]" + errorBody()?.toString()))
-                )
-            }.getOrElse { exception ->
-                when (exception) {
-                    is NullPointerException -> Fail(error = ResponseNullPointerException())
-                    else -> Fail(error = HttpException(cause = exception, message = exception.message))
-                }
-            })
-        }.flowOn(Dispatchers.IO)
+        suspend fun <T> create(call: (suspend () -> Response<T>)): Flow<HttpResponse<T>> =
+            flowOf(
+                runCatching { call.invoke() }.fold(
+                    onSuccess = {
+                        if (it.isSuccessful) Success(data = it.body()!!)
+                        else Fail(
+                            code = it.code(),
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                        )
+                    },
+                    onFailure = { exception ->
+                        when (exception) {
+                            is NullPointerException -> Fail(error = ResponseNullPointerException())
+                            else -> Fail(error = HttpException(cause = exception, message = exception.message))
+                        }
+                    })
+            ).flowOn(Dispatchers.IO)
 
         /**
          * [Response]를 반환하는 메서드를 전달한 뒤, Unit을 포함한 [HttpResponse] 타입의 Flow로 변환합니다.
@@ -69,15 +72,26 @@ sealed interface HttpResponse<out T : Any?> {
          * val response = HttpResponse.createEmpty { networkResponse }
          * ```
          */
-        fun <T> createEmpty(call: (suspend () -> Response<T>)): Flow<HttpResponse<Unit>> = flow {
-            emit(call().runCatching {
-                if (isSuccessful) Success(data = Unit)
-                else Fail(
-                    code = code(),
-                    error = HttpException(message = ("[${code()}]" + errorBody()?.toString()))
+        suspend fun <T> createEmpty(call: (suspend () -> Response<T>)): Flow<HttpResponse<Unit>> =
+            flowOf(
+                runCatching { call.invoke() }.fold(
+                    onSuccess = {
+                        if (it.isSuccessful) Success(data = Unit)
+                        else Fail(
+                            code = it.code(),
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                        )
+                    },
+                    onFailure = { exception ->
+                        Fail(
+                            error = HttpException(
+                                cause = exception,
+                                message = exception.message
+                            )
+                        )
+                    }
                 )
-            }.getOrElse { exception -> Fail(error = HttpException(cause = exception, message = exception.message)) })
-        }.flowOn(Dispatchers.IO)
+            ).flowOn(Dispatchers.IO)
 
         /**
          *  `BaseDto`를 포함하고 있는 [HttpResponse] 타입을 [Result]로 변환합니다.

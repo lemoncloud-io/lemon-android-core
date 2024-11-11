@@ -16,7 +16,7 @@ import io.lemoncloud.android.buildSystem.Config.VERSION_NAME
  */
 data class FlavorType(
     val name: String,
-    val dimension: FlavorDimension = FlavorDimension.Version,
+    val dimension: FlavorDimension = FlavorDimension.VERSION,
     val suffix: String? = null,
     val versionCode: Int = VERSION_CODE,
     val versionName: String = VERSION_NAME,
@@ -26,6 +26,6 @@ data class FlavorType(
 ) {
 
     // Change it, if you append or update dimension
-    enum class FlavorDimension { Version }
+    enum class FlavorDimension { VERSION }
 
 }

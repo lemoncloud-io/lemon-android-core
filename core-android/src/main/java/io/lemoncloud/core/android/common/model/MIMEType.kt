@@ -1,10 +1,10 @@
 package io.lemoncloud.core.android.common.model
 
 enum class MIMEType(val type: String) {
-    All(type = "*/*"),
-    Text(type = "text/*"),
-    Image(type = "image/*"),
-    Audio(type = "audio/*"),
-    Video(type = "video/*"),
-    Application(type = "application/*"),
+    ALL(type = "*/*"),
+    TEXT(type = "text/*"),
+    IMAGE(type = "image/*"),
+    AUDIO(type = "audio/*"),
+    VIDEO(type = "video/*"),
+    APPLICATION(type = "application/*"),
 }
