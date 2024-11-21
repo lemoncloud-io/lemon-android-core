@@ -91,7 +91,7 @@ object IntentUtils {
     fun getSendTextIntent(text: String): Intent =
         intentBuilder()
             .setAction(Intent.ACTION_SEND)
-            .setType(MIMEType.Text.type)
+            .setType(MIMEType.TEXT.type)
             .putExtras(Intent.EXTRA_TEXT to text)
             .build()
 

@@ -21,11 +21,12 @@ subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
 
     group = "io.lemoncloud"
-    version = "0.0.6"
+    version = "0.0.7"
 
     mavenPublishing {
         publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
+        signAllPublications()
         pom {
             name.set("Android Lemon Core")
             description.set("This is Android utilities library for Lemon Cloud.")
