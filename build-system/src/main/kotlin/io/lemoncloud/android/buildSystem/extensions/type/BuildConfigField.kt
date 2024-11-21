@@ -12,8 +12,8 @@ data class BuildConfigField(
     val value: Any
 ) {
     enum class Type(val field: String) {
-        StringType(field = "String"),
-        IntType(field = "int"),
-        BooleanType(field = "boolean")
+        STRING(field = "String"),
+        INT(field = "int"),
+        BOOLEAN(field = "boolean")
     }
 }
