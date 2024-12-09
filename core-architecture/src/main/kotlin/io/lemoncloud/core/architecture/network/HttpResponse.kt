@@ -35,10 +35,10 @@ sealed interface HttpResponse<out T : Any?> {
     companion object {
 
         /**
-         * [Response]를 반환하는 `Retrofit`의 통신 메서드를 전달받아 [HttpResponse] 타입의 Flow로 변환합니다.
-         * @param call 네트워크 통신 메서드 `Response`형태의 반환 값을 전달받아야만 한다.
+         * [Response]를 반환하는 메서드를 전달받아 [HttpResponse] 타입의 Flow로 변환합니다.
+         * @param call `Response`타입의 반환 값을 전달받아야만 합니다.
          */
-        suspend fun <T> create(call: (suspend () -> Response<T>)): Flow<HttpResponse<T>> =
+        suspend fun <T> valueOf(call: (suspend () -> Response<T>)): Flow<HttpResponse<T>> =
             flowOf(
                 runCatching { call.invoke() }.fold(
                     onSuccess = {
@@ -72,7 +72,7 @@ sealed interface HttpResponse<out T : Any?> {
          * val response = HttpResponse.createEmpty { networkResponse }
          * ```
          */
-        suspend fun <T> createEmpty(call: (suspend () -> Response<T>)): Flow<HttpResponse<Unit>> =
+        suspend fun <T> valueOfWithEmpty(call: (suspend () -> Response<T>)): Flow<HttpResponse<Unit>> =
             flowOf(
                 runCatching { call.invoke() }.fold(
                     onSuccess = {
@@ -94,24 +94,62 @@ sealed interface HttpResponse<out T : Any?> {
             ).flowOn(Dispatchers.IO)
 
         /**
+         * Nullable한 [Response]를 반환하는 메서드를 전달받아 [HttpResponse] 타입의 Flow로 변환합니다.
+         * @param call `Response`형태의 반환 값을 전달받아야만 합니다
+         */
+        suspend fun <T> valueOfWithNull(call: (suspend () -> Response<T>)): Flow<HttpResponse<T?>> =
+            flowOf(
+                runCatching { call.invoke() }.fold(
+                    onSuccess = {
+                        if (it.isSuccessful) Success(data = it.body())
+                        else Fail(
+                            code = it.code(),
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                        )
+                    },
+                    onFailure = { exception ->
+                        Fail(
+                            error = HttpException(
+                                cause = exception,
+                                message = exception.message
+                            )
+                        )
+                    }
+                )
+            ).flowOn(Dispatchers.IO)
+
+        /**
          *  `BaseDto`를 포함하고 있는 [HttpResponse] 타입을 [Result]로 변환합니다.
          *  추가적인 매핑 과정이 없는 상황에서 네트워크 레이어의 DTO 데이터를 빠르게 도메인 모델로 변경 하고자 할 때 사용합니다.
          *  @see [BaseDto.toModel]
          */
-        fun <Dto : BaseDto<Model>, Model : Any> HttpResponse<Dto>.toResult(): Result<Model> = when (this) {
-            is Fail -> Result.failure(exception = this.error)
-            is Success -> Result.success(value = this.data.toModel())
-        }
+        fun <Dto : BaseDto<Model>, Model : Any> to(httpResponse: HttpResponse<Dto>): Result<Model> =
+            when (httpResponse) {
+                is Fail -> Result.failure(exception = httpResponse.error)
+                is Success -> Result.success(value = httpResponse.data.toModel())
+            }
+
+        /**
+         *  `BaseDto`를 포함하고 있는 [HttpResponse] 리스트 타입을 [Result] 리스트로 변환합니다.
+         *  추가적인 매핑 과정이 없는 상황에서 네트워크 레이어의 DTO 데이터를 빠르게 도메인 모델로 변경 하고자 할 때 사용합니다.
+         *  @see [BaseDto.toModel]
+         */
+        fun <Dto : BaseDto<Model>, Model : Any> to(httpResponse: HttpResponse<List<Dto>>): Result<List<Model>> =
+            when (httpResponse) {
+                is Fail -> Result.failure(exception = httpResponse.error)
+                is Success -> Result.success(value = httpResponse.data.map { it.toModel() })
+            }
 
         /**
          *  [HttpResponse] 타입을 [Result]로 변환합니다.
          *  @param mapper 어떠한 방식으로 변환할 지에 대한 매퍼 람다식을 정의합니다.
          */
-        fun <In, Out> HttpResponse<In>.toResult(
+        fun <In, Out> to(
+            httpResponse: HttpResponse<In>,
             mapper: (In) -> Out
-        ): Result<Out> = when (this) {
-            is Fail -> Result.failure(exception = this.error)
-            is Success -> Result.success(mapper(this.data))
+        ): Result<Out> = when (httpResponse) {
+            is Fail -> Result.failure(exception = httpResponse.error)
+            is Success -> Result.success(mapper(httpResponse.data))
         }
     }
 }
