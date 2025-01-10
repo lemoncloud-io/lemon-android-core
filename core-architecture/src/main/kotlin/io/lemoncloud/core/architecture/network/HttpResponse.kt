@@ -121,6 +121,7 @@ sealed interface HttpResponse<out T : Any?> {
          *  추가적인 매핑 과정이 없는 상황에서 네트워크 레이어의 DTO 데이터를 빠르게 도메인 모델로 변경 하고자 할 때 사용합니다.
          *  @see [BaseDto.toModel]
          */
+        @JvmName("toWithList")
         fun <Dto : BaseDto<Model>, Model : Any> to(httpResponse: HttpResponse<List<Dto>>): Result<List<Model>> =
             when (httpResponse) {
                 is Fail -> Result.failure(exception = httpResponse.error)

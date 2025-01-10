@@ -21,7 +21,7 @@ subprojects {
     apply(plugin = "com.vanniktech.maven.publish")
 
     group = "io.lemoncloud"
-    version = "0.0.7"
+    version = "0.0.8"
 
     mavenPublishing {
         publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
