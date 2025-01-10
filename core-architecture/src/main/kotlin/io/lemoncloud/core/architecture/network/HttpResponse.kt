@@ -51,9 +51,10 @@ sealed interface HttpResponse<out T : Any?> {
                     onFailure = { exception ->
                         when (exception) {
                             is NullPointerException -> Fail(error = ResponseNullPointerException())
-                            else -> Fail(error = HttpException(cause = exception, message = exception.message))
+                            else -> Fail(error = exception)
                         }
-                    })
+                    }
+                )
             ).flowOn(Dispatchers.IO)
 
         /**
@@ -82,14 +83,7 @@ sealed interface HttpResponse<out T : Any?> {
                             error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
                         )
                     },
-                    onFailure = { exception ->
-                        Fail(
-                            error = HttpException(
-                                cause = exception,
-                                message = exception.message
-                            )
-                        )
-                    }
+                    onFailure = { Fail(it) }
                 )
             ).flowOn(Dispatchers.IO)
 
@@ -107,14 +101,7 @@ sealed interface HttpResponse<out T : Any?> {
                             error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
                         )
                     },
-                    onFailure = { exception ->
-                        Fail(
-                            error = HttpException(
-                                cause = exception,
-                                message = exception.message
-                            )
-                        )
-                    }
+                    onFailure = { Fail(it) }
                 )
             ).flowOn(Dispatchers.IO)
 
