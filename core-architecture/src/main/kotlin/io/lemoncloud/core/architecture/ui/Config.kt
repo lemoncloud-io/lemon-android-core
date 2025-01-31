@@ -1,9 +1,10 @@
 package io.lemoncloud.core.architecture.ui
 
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.channels.Channel.Factory.RENDEZVOUS
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.Channel.Factory.RENDEZVOUS
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
 
 /**
  * [Config]
@@ -20,5 +21,6 @@ data class Config<EVENT>(
     val effectOnBufferOverflow: BufferOverflow = BufferOverflow.DROP_OLDEST,
     val eventCapacity: Int = RENDEZVOUS,
     val eventOnBufferOverflow: BufferOverflow = BufferOverflow.DROP_OLDEST,
-    val eventOnUndeliveredElement: ((EVENT) -> Unit)? = null
+    val eventOnUndeliveredElement: ((EVENT) -> Unit)? = null,
+    val screenStateStarted: SharingStarted = SharingStarted.Eagerly
 )

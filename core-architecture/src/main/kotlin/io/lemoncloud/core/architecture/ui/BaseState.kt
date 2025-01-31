@@ -13,8 +13,11 @@ package io.lemoncloud.core.architecture.ui
  *
  * @property isLoading
  * @property isFailure
+ * @property screenState
+ * @see ScreenState
  */
 interface BaseState {
     val isLoading: Boolean
     val isFailure: Boolean
+    var screenState: ScreenState
 }
