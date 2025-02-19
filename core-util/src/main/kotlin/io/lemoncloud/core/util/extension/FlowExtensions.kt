@@ -1,5 +1,6 @@
 package io.lemoncloud.core.util.extension
 
+import io.lemoncloud.core.util.extension.FlowExtensions.combine
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
@@ -7,7 +8,8 @@ import kotlinx.coroutines.flow.combineTransform
 object FlowExtensions {
 
     /**
-     * 다수의 Flow를 결합하는 익스텐션
+     * [combine]
+     * - 다수의 Flow를 결합 합니다
      */
     @Suppress("UNCHECKED_CAST")
     fun <T1, T2, T3, T4, T5, T6, R> combine(
@@ -30,7 +32,8 @@ object FlowExtensions {
     }
 
     /**
-     * 다수의 Flow를 결합하는 익스텐션
+     * [combine]
+     * - 다수의 Flow를 결합 합니다
      */
     @Suppress("UNCHECKED_CAST")
     fun <T1, T2, T3, T4, T5, T6, T7, R> combine(

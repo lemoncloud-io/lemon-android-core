@@ -9,18 +9,19 @@ import io.lemoncloud.core.android.common.model.MIMEType
 import java.io.Serializable
 
 /**
- * intent 생성을 도와줍니다.
+ * [IntentBuilder]
+ * - 값을 조합하여 intent를 최종적으로 빌딩할 때 사용합니다.
  */
-class IntentBuilder() {
+class IntentBuilder private constructor() {
 
     private var intent: Intent = Intent()
 
-    constructor(context: Context, `class`: Class<*>) : this() {
+    private constructor(context: Context, `class`: Class<*>) : this() {
         intent = Intent(context, `class`)
     }
 
-    constructor(intent: Intent) : this() {
-        this.intent = intent
+    private constructor(intent: Intent) : this() {
+        this.intent = Intent(intent)
     }
 
     /**
@@ -116,5 +117,31 @@ class IntentBuilder() {
 
     companion object {
         const val DEFAULT_KEY = "KEY"
+
+        /**
+         * [builder]
+         * 빈 인텐트 빌더를 생성합니다.
+         *
+         * @see IntentBuilder
+         */
+        fun builder(): IntentBuilder = IntentBuilder()
+
+        /**
+         * [builder]
+         * 인텐트 빌더를 생성합니다.
+         * intent 타겟을 포함할 경우 헤당 메서드를 사용합니다. (명시적)
+         *
+         * @see IntentBuilder
+         */
+        fun builder(context: Context, `class`: Class<*>): IntentBuilder = IntentBuilder(context, `class`)
+
+        /**
+         * [builder]
+         * 인텐트 빌더를 생성합니다.
+         * intent 타겟을 포함할 경우 헤당 메서드를 사용합니다.
+         *
+         * @see IntentBuilder
+         */
+        fun builder(intent: Intent): IntentBuilder = IntentBuilder(intent)
     }
 }

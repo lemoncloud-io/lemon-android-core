@@ -45,7 +45,7 @@ sealed interface HttpResponse<out T : Any?> {
                         if (it.isSuccessful) Success(data = it.body()!!)
                         else Fail(
                             code = it.code(),
-                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.string()))
                         )
                     },
                     onFailure = { exception ->
@@ -80,7 +80,7 @@ sealed interface HttpResponse<out T : Any?> {
                         if (it.isSuccessful) Success(data = Unit)
                         else Fail(
                             code = it.code(),
-                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.string()))
                         )
                     },
                     onFailure = { Fail(it) }
@@ -98,7 +98,7 @@ sealed interface HttpResponse<out T : Any?> {
                         if (it.isSuccessful) Success(data = it.body())
                         else Fail(
                             code = it.code(),
-                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.toString()))
+                            error = HttpException(message = ("[${it.code()}]" + it.errorBody()?.string()))
                         )
                     },
                     onFailure = { Fail(it) }
