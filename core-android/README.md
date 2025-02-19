@@ -4,7 +4,6 @@
 ### Intent
 `Intent` 설정을 빌드하는 모듈입니다. `IntentBuilder`를 사용하여 Intent를 구성할 수 있으며, 이는 `Component` 의 `Launcher`와 연동하여 사용할 수 있습니다.
 또한 특수한 목적으로 사용되는 `Intent`를 빠르게 구성하는 함수가 존재합니다. (예를 들어, URL에 대한 사이트를 빠르게 불러오는 `getViewUrlIntent`, Application 설정으로 빠르게 이동하는 `getApplicationDetailSettingsIntent`)
-`PendingIntentUtils` 내 유틸리티를 사용할 경우 `Intent`를 `PendingIntent`로 변환할 수 있습니다.
 
 ### Launcher
 `Android Component` 설정을 빠르게 구성하는 모듈입니다.
