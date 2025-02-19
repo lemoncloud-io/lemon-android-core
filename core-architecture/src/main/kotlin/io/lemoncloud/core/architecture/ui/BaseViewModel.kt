@@ -65,13 +65,25 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : BaseEvent, EFFECT : Base
     /**
      * [screenState]
      *
-     * 현재 UI 화면 상태
+     * 현재 화면 상태
      */
     val screenState: StateFlow<ScreenState> = state.map { it.screenState }
         .stateIn(
             scope = viewModelScope,
             started = config.screenStateStarted,
             initialValue = initialState.screenState
+        )
+
+    /**
+     * [screenState]
+     *
+     * 현재 화면의 UI 상태
+     */
+    val uiState: StateFlow<UiState> = state.map { it.uiState }
+        .stateIn(
+            scope = viewModelScope,
+            started = config.uiStateStarted,
+            initialValue = initialState.uiState
         )
 
     /**
@@ -127,18 +139,6 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : BaseEvent, EFFECT : Base
     protected fun updateAndGetState(action: STATE.() -> STATE): STATE = _state.updateAndGet(action)
 
     protected fun getAndUpdateState(action: STATE.() -> STATE): STATE = _state.getAndUpdate(action)
-
-    /**
-     * [updateScreenState]
-     * - UI 화면 상태인 screenState를 업데이트 합니다
-     */
-    protected fun updateScreenState(screenState: ScreenState) {
-        while (true) {
-            val prevValue: STATE = _state.value
-            val nextValue: STATE = prevValue.apply { this.screenState = screenState }
-            if (_state.compareAndSet(prevValue, nextValue)) return
-        }
-    }
 
     /**
      * [tryEmitError]
@@ -198,5 +198,3 @@ abstract class BaseViewModel<STATE : BaseState, EVENT : BaseEvent, EFFECT : Base
     suspend fun bindEffect(scope: CoroutineScope, action: suspend (EFFECT) -> Unit) =
         effect.onEach { action(it) }.launchIn(scope)
 }
-
-
