@@ -1,7 +1,5 @@
 package io.lemoncloud.core.util.util
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
@@ -12,7 +10,8 @@ import java.time.format.DateTimeFormatter
 
 object DateUtils {
     /**
-     * [Instant] 타입을 주어진 특정 날짜 포멧으로 변환할 때 사용합니다.
+     * [toDateFormatString]
+     * - [Instant] 타입을 주어진 특정 날짜 포멧으로 변환할 때 사용합니다.
      * @param format 변환 하고자 하는 날짜 스타일 포멧 (ex. yyyy-MM-dd)
      */
     fun Instant.toDateFormatString(
@@ -21,7 +20,8 @@ object DateUtils {
     ): String = DateTimeFormatter.ofPattern(format).format(this.toJavaInstant().atZone(timeZone.toJavaZoneId()))
 
     /**
-     * [LocalDateTime] 타입을 주어진 특정 날짜 포멧으로 변환할 때 사용합니다.
+     * [toDateFormatString]
+     * - [LocalDateTime] 타입을 주어진 특정 날짜 포멧으로 변환할 때 사용합니다.
      * @param format 변환 하고자 하는 날짜 스타일 포멧 (ex. yyyy-MM-dd)
      * @param timeZone 사용 하고자 하는 TimeZone
      */
@@ -32,6 +32,10 @@ object DateUtils {
         DateTimeFormatter.ofPattern(format)
             .format(this.toJavaLocalDateTime().atZone(timeZone.toJavaZoneId()))
 
+    /**
+     * [convertTimestampToDateFormatString]
+     * - 주어진 Timestamp를 주어진 특정 날짜 포멧으로 변환할 때 사용합니다.
+     */
     fun convertTimestampToDateFormatString(
         timestamp: Long,
         format: String,

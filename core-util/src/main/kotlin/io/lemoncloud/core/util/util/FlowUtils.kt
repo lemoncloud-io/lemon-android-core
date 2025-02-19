@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit
 object FlowUtils {
 
     /**
-     * 일정 시간 간격으로 틱을 발생시키는 Flow를 생성합니다.
+     * [generateTickFlow]
+     * - 일정 시간 간격으로 틱을 발생시키는 Flow를 생성합니다.
      * @param interval 시간 간격
      * @param timeUnit 시간 단위 (ex. MILLISECONDS, SECONDS, MINUTES)
      * @param tickCount 틱 발생 개수 (기본값: Long.MAX_VALUE)

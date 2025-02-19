@@ -22,5 +22,6 @@ data class Config<EVENT>(
     val eventCapacity: Int = RENDEZVOUS,
     val eventOnBufferOverflow: BufferOverflow = BufferOverflow.DROP_OLDEST,
     val eventOnUndeliveredElement: ((EVENT) -> Unit)? = null,
-    val screenStateStarted: SharingStarted = SharingStarted.Eagerly
+    val screenStateStarted: SharingStarted = SharingStarted.Eagerly,
+    val uiStateStarted: SharingStarted = SharingStarted.Eagerly
 )
